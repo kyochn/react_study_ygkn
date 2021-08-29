@@ -1,6 +1,7 @@
 import { ChangeEvent, useState, VFC } from "react";
 import { Todo } from "../lib/todo";
 import { NewTodo } from "./NewTodo";
+import { TodoList } from "./TodoList";
 
 export const App: VFC = () => {
     const [todoList, setTodoList] = useState<Todo[]>([]);
@@ -15,17 +16,14 @@ export const App: VFC = () => {
         setTodoList((oldTodoList) => [...oldTodoList, newTodo]);
     };
 
-    const handleChangeTodo = (event: ChangeEvent<HTMLInputElement>) => {
-        const checked = event.currentTarget.checked;
-        const changedTodoId = event.currentTarget.value;
-
+    const handleChangeDone = (todoId: Todo["id"], done: boolean) => {
         setTodoList((oldTodoList) =>
             oldTodoList.map((todo) => {
-                if (todo.id !== changedTodoId) {
+                if (todo.id !== todoId) {
                     return todo;
                 }
 
-                return { ...todo, done: checked };
+                return { ...todo, done};
             })
         );
     };
@@ -33,20 +31,7 @@ export const App: VFC = () => {
     return (
         <div>
             <NewTodo onAdd={addTodo}/>
-            <ul>
-                {
-                    todoList.map((todo) => (
-                        <li key={todo.id}>
-                            <input type="checkbox"
-                                checked={todo.done}
-                                value={todo.id}
-                                onChange={handleChangeTodo}
-                            />
-                            {todo.title}
-                        </li>
-                    ))
-               } 
-            </ul>
+            <TodoList todoList={todoList} onChangeDone={handleChangeDone} />
         </div>
     );
 };
