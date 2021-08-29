@@ -1,10 +1,15 @@
 import { FormEvent, useState, VFC } from "react";
 
-export const NewTodo: VFC = () => {
+type Props = {
+    onAdd: (title: string) => void;
+};
+
+export const NewTodo: VFC<Props> = ({onAdd}) => {
     const [title, setTitle] = useState<string>("");
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault(); //フォームの送信を止める
+        onAdd(title);
     };
 
     return (

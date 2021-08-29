@@ -4,7 +4,9 @@ import { NewTodo } from "./NewTodo";
 export const App: VFC = () => {
     return (
         <div>
-            <NewTodo />
+            <NewTodo
+                onAdd={(title) => console.log(title)}
+            />
         </div>
     );
 };
