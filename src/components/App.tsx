@@ -5,6 +5,16 @@ import { NewTodo } from "./NewTodo";
 export const App: VFC = () => {
     const [todoList, setTodoList] = useState<Todo[]>([]);
 
+    const addTodo = (title: string) => {
+        const newTodo = {
+          title,
+          done: false,
+          id: Math.random().toString(),
+        };
+    
+        setTodoList((oldTodoList) => [...oldTodoList, newTodo]);
+    };
+
     return (
         <div>
             <NewTodo
@@ -22,7 +32,10 @@ export const App: VFC = () => {
             <ul>
                 {
                     todoList.map((todo) => (
-                        <li key={todo.id}>{todo.title}</li>
+                        <li key={todo.id}>
+                            <input type="checkbox" checked={todo.done} />
+                            {todo.title}
+                        </li>
                     ))
                } 
             </ul>
