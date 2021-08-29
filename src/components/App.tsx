@@ -28,10 +28,19 @@ export const App: VFC = () => {
         );
     };
 
+    const handleRemove = ( todoId: Todo["id"] ) => {
+        setTodoList((oldTodoList) =>
+            oldTodoList.filter((todo) => todo.id !== todoId)
+        );
+    };
+
     return (
-        <div>
+        <div className="App">
             <NewTodo onAdd={addTodo}/>
-            <TodoList todoList={todoList} onChangeDone={handleChangeDone} />
+            <TodoList todoList={todoList}
+                onChangeDone={handleChangeDone}
+                onRemove={handleRemove}
+            />
         </div>
     );
 };

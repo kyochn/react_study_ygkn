@@ -14,11 +14,13 @@ export const NewTodo: VFC<Props> = ({onAdd}) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="NewTodo">
             <input type="text"
                 name="title"
+                autoComplete="off"
                 onChange={(event) => setTitle(event.currentTarget.value)} //input が変更されたら 'title' state を変更
                 value={title} //value をtitle state に
+                className="NewTodo__inputTitle"
             />
             <button type="submit">追加</button>
         </form>
