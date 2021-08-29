@@ -10,6 +10,7 @@ export const NewTodo: VFC<Props> = ({onAdd}) => {
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault(); //フォームの送信を止める
         onAdd(title);
+        setTitle("");
     };
 
     return (
